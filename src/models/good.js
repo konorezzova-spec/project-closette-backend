@@ -13,19 +13,24 @@ const goodSchema = new Schema(
       type: Schema.Types.ObjectId,
       required: true,
       ref: "Category",
+      index: true,
     },
 
     image: String,
 
     price: {
-      value: Number,
-      currency: String,
+      value: {
+        type: Number,
+        index: true,
+      },
+      currency: { type: String },
     },
 
     size: {
       type: [String],
       enum: SIZE,
       required: true,
+      index: true,
     },
 
     description: String,
@@ -42,14 +47,11 @@ const goodSchema = new Schema(
     gender: {
       type: String,
       enum: GENDER,
+      index: true,
     },
     characteristics: [String],
   },
   //   { timestamps: true, versionKey: false },
 );
-
-goodSchema.index({ category: 1 });
-goodSchema.index({ size: 1 });
-goodSchema.index({ gender: 1 });
 
 export const Good = model("Good", goodSchema);

@@ -54,8 +54,6 @@ const userSchema = new Schema(
   { timestamps: true, varsionKey: false },
 );
 
-userSchema.index({ email: 1 }, { unique: true });
-
 userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
